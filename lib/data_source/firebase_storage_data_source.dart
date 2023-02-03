@@ -1,7 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage_multiplex/model/folder_model.dart';
 
-class CloudFirestoreDataSource {
+class FirebaseStorageDataSource {
   final storage = FirebaseStorage.instance.ref();
 
   /// フォルダ・ファイル一覧を取得する
