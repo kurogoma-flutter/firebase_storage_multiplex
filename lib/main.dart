@@ -35,8 +35,8 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(),
       body: const Center(
         child: Icon(
-          Icons.place,
-          size: 24,
+          Icons.ac_unit,
+          size: 80,
         ),
       ),
     );
