@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "725845336918",
+    "project_id": "multiplex-storage",
+    "storage_bucket": "multiplex-storage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725845336918:android:9265de9320f94ac3b06cf7",
+        "android_client_info": {
+          "package_name": "com.example.firebase_storage_multiplex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725845336918-hbdgpo9fic6h9o2ovrdrb122r38uilvo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyzVXRhJiFayn4PaRYEZSjFhSNhydWqyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725845336918-hbdgpo9fic6h9o2ovrdrb122r38uilvo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "725845336918-el94eitcp91rphpaj94q0t32a143o51b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.firebaseStorageMultiplex"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
