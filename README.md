@@ -1,0 +1,2 @@
+# firebase_storage_pultiplex
+FirebaseStorageを多重構造にする
