@@ -3,6 +3,13 @@ import 'package:firebase_storage_multiplex/state/firebase_storage_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final firebaseStorageNotifierProvider =
+    StateNotifierProvider<FirebaseStorageNotifier, FirebaseStorageState>(
+  (ref) => FirebaseStorageNotifier(
+    firebaseStorageService: ref.read(fireStorageService),
+  ),
+);
+
 class FirebaseStorageNotifier extends StateNotifier<FirebaseStorageState> {
   FirebaseStorageNotifier({
     required this.firebaseStorageService,
