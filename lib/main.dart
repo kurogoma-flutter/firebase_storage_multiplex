@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage_multiplex/firebase_options.dart';
+import 'package:firebase_storage_multiplex/model/folder_model.dart';
 import 'package:firebase_storage_multiplex/notifier/firebase_storage_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -73,19 +74,43 @@ class _HomePageState extends ConsumerState<HomePage> {
           data: (data) {
             return ListView.builder(
               itemCount: data.length,
+              padding: const EdgeInsets.only(top: 8),
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    data[index].folderName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    notifier.getFolderList(
-                      folderPath: data[index].folderPath,
-                    );
-                  },
+                final item = data[index];
+                return InkWell(
+                  onTap: () {},
+                  child: item.folderType == FolderType.folder
+                      ? Card(
+                          child: ListTile(
+                            leading: const Icon(Icons.folder),
+                            title: Text(
+                              item.folderName,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            onTap: () async {
+                              await notifier.getFolderList(
+                                folderPath: item.folderPath,
+                              );
+                            },
+                          ),
+                        )
+                      : ListTile(
+                          leading: const Icon(
+                            Icons.file_copy,
+                            color: Colors.white,
+                          ),
+                          title: Text(
+                            item.folderName,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                 );
               },
             );

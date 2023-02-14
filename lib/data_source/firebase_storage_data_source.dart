@@ -30,7 +30,7 @@ class FirebaseStorageDataSource {
         folderId: file.name,
         folderName: file.name,
         folderPath: file.fullPath,
-        folderType: FolderType.folder,
+        folderType: FolderType.file,
       );
       folderList.add(folderModel);
     }
