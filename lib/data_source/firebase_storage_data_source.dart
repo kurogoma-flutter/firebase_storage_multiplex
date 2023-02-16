@@ -48,4 +48,12 @@ class FirebaseStorageDataSource {
     final fileRef = storage.child(folderPath).child(fileName);
     await fileRef.putData(fileBytes);
   }
+
+  /// Storageにフォルダを作成
+  Future<void> createFolder({
+    required String folderPath,
+  }) async {
+    final folderRef = storage.child(folderPath);
+    await folderRef.putData(Uint8List(0));
+  }
 }
