@@ -1,5 +1,6 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_storage_multiplex/model/folder_model.dart';
+import 'package:flutter/foundation.dart';
 
 class FirebaseStorageDataSource {
   final storage = FirebaseStorage.instance.ref();
@@ -36,5 +37,15 @@ class FirebaseStorageDataSource {
     }
 
     return folderList;
+  }
+
+  /// Storageにファイルを登録
+  Future<void> uploadFileToStorage({
+    required String folderPath,
+    required String fileName,
+    required Uint8List fileBytes,
+  }) async {
+    final fileRef = storage.child(folderPath).child(fileName);
+    await fileRef.putData(fileBytes);
   }
 }
