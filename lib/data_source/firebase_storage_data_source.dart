@@ -56,4 +56,83 @@ class FirebaseStorageDataSource {
     final folderRef = storage.child(folderPath);
     await folderRef.putData(Uint8List(0));
   }
+
+  /// Storageのファイルを削除
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [fileName] ファイル名
+  ///
+  /// [void]を返す
+  Future<void> deleteFile({
+    required String folderPath,
+    required String fileName,
+  }) async {
+    final fileRef = storage.child(folderPath).child(fileName);
+    await fileRef.delete();
+  }
+
+  /// Storageのフォルダを再帰的に削除
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [void]を返す
+  Future<void> _deleteFolderRecursive({
+    required String folderPath,
+  }) async {
+    final folderRef = storage.child(folderPath);
+    final folderListResult = await folderRef.listAll();
+
+    for (final folder in folderListResult.prefixes) {
+      await _deleteFolderRecursive(folderPath: folder.fullPath);
+    }
+
+    for (final file in folderListResult.items) {
+      await file.delete();
+    }
+
+    await folderRef.delete();
+  }
+
+  /// フォルダの中身をすべて削除
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [void]を返す
+  Future<void> deleteFolderContents({
+    required String folderPath,
+  }) async {
+    final folderRef = storage.child(folderPath);
+    final folderListResult = await folderRef.listAll();
+
+    for (final folder in folderListResult.prefixes) {
+      await _deleteFolderRecursive(folderPath: folder.fullPath);
+    }
+
+    for (final file in folderListResult.items) {
+      await file.delete();
+    }
+  }
+
+  /// Storageのファイルをダウンロード
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [fileName] ファイル名
+  ///
+  /// [Uint8List]を返す
+  ///
+  /// ファイルが存在しない場合は空のUint8Listを返す
+  Future<Uint8List?> downloadFile({
+    required String folderPath,
+    required String fileName,
+  }) async {
+    final fileRef = storage.child(folderPath).child(fileName);
+    try {
+      final fileBytes = await fileRef.getData();
+      return fileBytes;
+    } catch (e) {
+      return Uint8List(0);
+    }
+  }
 }
