@@ -5,7 +5,7 @@ import 'package:firebase_storage_multiplex/notifier/firebase_storage_notifier.da
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'dialog.dart';
+import 'button.dart';
 import 'folder_detail_page.dart';
 
 Future<void> main() async {
@@ -160,87 +160,19 @@ class _HomePageState extends ConsumerState<HomePage> with RouteAware {
             right: 16,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const FolderUploadButton(),
-                const SizedBox(height: 12),
-                MenuButton(
-                  icon: Icons.file_upload_rounded,
-                  onTap: () {},
+              children: const [
+                FolderCreateButton(
+                  folderName: '',
+                  currentPath: '',
+                ),
+                SizedBox(height: 12),
+                FileUploadButton(
+                  currentPath: '',
                 ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class FolderUploadButton extends ConsumerWidget {
-  const FolderUploadButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return MenuButton(
-      icon: Icons.folder_open_rounded,
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            // 背景が透ける角丸ダイアログ
-            return BlurAlertDialog(
-              title: 'フォルダを作成',
-              formContent: 'フォルダ名を入力してください',
-              label: '作成',
-              onTap: () async {
-                await ref
-                    .read(firebaseStorageNotifierProvider.notifier)
-                    .createFolder(
-                      currentPath: 'users/',
-                      folderName: 'test',
-                    );
-              },
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class MenuButton extends StatelessWidget {
-  const MenuButton({
-    super.key,
-    required this.icon,
-    required this.onTap,
-  });
-
-  final IconData icon;
-  final Function() onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(34),
-      onTap: onTap,
-      child: Container(
-        width: 68,
-        height: 68,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(34),
-          color: const Color.fromARGB(94, 9, 74, 186),
-          border: Border.all(
-            color: const Color.fromARGB(255, 255, 255, 255),
-            width: 3,
-          ),
-        ),
-        child: Icon(
-          icon,
-          size: 32,
-          color: Colors.white,
-        ),
       ),
     );
   }
