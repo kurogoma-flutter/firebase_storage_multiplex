@@ -58,4 +58,49 @@ class FirebaseStorageService {
   }) async {
     return await repository.createFolder(folderPath: folderPath);
   }
+
+  /// Storageのファイルを削除
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [fileName] ファイル名
+  ///
+  /// [void]を返す
+  Future<void> deleteFile({
+    required String folderPath,
+    required String fileName,
+  }) async {
+    return await repository.deleteFile(
+      folderPath: folderPath,
+      fileName: fileName,
+    );
+  }
+
+  /// Storageのフォルダを削除
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [void]を返す
+  Future<void> deleteFolder({
+    required String folderPath,
+  }) async {
+    return await repository.deleteFolderContents(folderPath: folderPath);
+  }
+
+  /// Storageのファイルをダウンロード
+  ///
+  /// [folderPath] フォルダパス
+  ///
+  /// [fileName] ファイル名
+  ///
+  /// [Uint8List]を返す
+  Future<Uint8List?> downloadFile({
+    required String folderPath,
+    required String fileName,
+  }) async {
+    return await repository.downloadFile(
+      folderPath: folderPath,
+      fileName: fileName,
+    );
+  }
 }
