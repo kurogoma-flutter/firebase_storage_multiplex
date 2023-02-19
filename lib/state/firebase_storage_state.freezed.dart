@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FirebaseStorageState {
   AsyncValue<List<FolderModel>> get fileList =>
       throw _privateConstructorUsedError;
+  String get folderName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FirebaseStorageStateCopyWith<FirebaseStorageState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $FirebaseStorageStateCopyWith<$Res> {
           $Res Function(FirebaseStorageState) then) =
       _$FirebaseStorageStateCopyWithImpl<$Res, FirebaseStorageState>;
   @useResult
-  $Res call({AsyncValue<List<FolderModel>> fileList});
+  $Res call({AsyncValue<List<FolderModel>> fileList, String folderName});
 }
 
 /// @nodoc
@@ -48,12 +49,17 @@ class _$FirebaseStorageStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? fileList = null,
+    Object? folderName = null,
   }) {
     return _then(_value.copyWith(
       fileList: null == fileList
           ? _value.fileList
           : fileList // ignore: cast_nullable_to_non_nullable
               as AsyncValue<List<FolderModel>>,
+      folderName: null == folderName
+          ? _value.folderName
+          : folderName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -66,7 +72,7 @@ abstract class _$$_FirebaseStorageStateCopyWith<$Res>
       __$$_FirebaseStorageStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AsyncValue<List<FolderModel>> fileList});
+  $Res call({AsyncValue<List<FolderModel>> fileList, String folderName});
 }
 
 /// @nodoc
@@ -81,12 +87,17 @@ class __$$_FirebaseStorageStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fileList = null,
+    Object? folderName = null,
   }) {
     return _then(_$_FirebaseStorageState(
       fileList: null == fileList
           ? _value.fileList
           : fileList // ignore: cast_nullable_to_non_nullable
               as AsyncValue<List<FolderModel>>,
+      folderName: null == folderName
+          ? _value.folderName
+          : folderName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -94,15 +105,19 @@ class __$$_FirebaseStorageStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FirebaseStorageState implements _FirebaseStorageState {
-  const _$_FirebaseStorageState({this.fileList = const AsyncValue.loading()});
+  const _$_FirebaseStorageState(
+      {this.fileList = const AsyncValue.loading(), this.folderName = ''});
 
   @override
   @JsonKey()
   final AsyncValue<List<FolderModel>> fileList;
+  @override
+  @JsonKey()
+  final String folderName;
 
   @override
   String toString() {
-    return 'FirebaseStorageState(fileList: $fileList)';
+    return 'FirebaseStorageState(fileList: $fileList, folderName: $folderName)';
   }
 
   @override
@@ -111,11 +126,13 @@ class _$_FirebaseStorageState implements _FirebaseStorageState {
         (other.runtimeType == runtimeType &&
             other is _$_FirebaseStorageState &&
             (identical(other.fileList, fileList) ||
-                other.fileList == fileList));
+                other.fileList == fileList) &&
+            (identical(other.folderName, folderName) ||
+                other.folderName == folderName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fileList);
+  int get hashCode => Object.hash(runtimeType, fileList, folderName);
 
   @JsonKey(ignore: true)
   @override
@@ -127,10 +144,13 @@ class _$_FirebaseStorageState implements _FirebaseStorageState {
 
 abstract class _FirebaseStorageState implements FirebaseStorageState {
   const factory _FirebaseStorageState(
-      {final AsyncValue<List<FolderModel>> fileList}) = _$_FirebaseStorageState;
+      {final AsyncValue<List<FolderModel>> fileList,
+      final String folderName}) = _$_FirebaseStorageState;
 
   @override
   AsyncValue<List<FolderModel>> get fileList;
+  @override
+  String get folderName;
   @override
   @JsonKey(ignore: true)
   _$$_FirebaseStorageStateCopyWith<_$_FirebaseStorageState> get copyWith =>

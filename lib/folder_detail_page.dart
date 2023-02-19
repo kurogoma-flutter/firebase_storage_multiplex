@@ -66,6 +66,7 @@ class _FolderDetailPageState extends ConsumerState<FolderDetailPage>
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(firebaseStorageNotifierProvider);
+    final notifier = ref.watch(firebaseStorageNotifierProvider.notifier);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 30, 30, 30),
@@ -146,14 +147,21 @@ class _FolderDetailPageState extends ConsumerState<FolderDetailPage>
             right: 16,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children: [
                 FolderCreateButton(
-                  folderName: '',
-                  currentPath: '',
+                  currentPath: widget.folderPath,
+                  onTap: () async {
+                    notifier.createFolder(
+                      currentPath: widget.folderPath,
+                    );
+                  },
+                  onChanged: (text) {
+                    notifier.setFolderName(text);
+                  },
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 FileUploadButton(
-                  currentPath: '',
+                  currentPath: widget.folderPath,
                 ),
               ],
             ),

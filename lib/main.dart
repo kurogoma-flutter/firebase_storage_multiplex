@@ -80,6 +80,7 @@ class _HomePageState extends ConsumerState<HomePage> with RouteAware {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(firebaseStorageNotifierProvider);
+    final notifier = ref.read(firebaseStorageNotifierProvider.notifier);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 30, 30, 30),
@@ -160,14 +161,21 @@ class _HomePageState extends ConsumerState<HomePage> with RouteAware {
             right: 16,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: const [
+              children: [
                 FolderCreateButton(
-                  folderName: '',
-                  currentPath: '',
+                  currentPath: 'users/',
+                  onTap: () async {
+                    notifier.createFolder(
+                      currentPath: 'users/',
+                    );
+                  },
+                  onChanged: (text) {
+                    notifier.setFolderName(text);
+                  },
                 ),
-                SizedBox(height: 12),
-                FileUploadButton(
-                  currentPath: '',
+                const SizedBox(height: 12),
+                const FileUploadButton(
+                  currentPath: 'users/',
                 ),
               ],
             ),

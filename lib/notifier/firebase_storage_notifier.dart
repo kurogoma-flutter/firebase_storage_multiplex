@@ -90,12 +90,20 @@ class FirebaseStorageNotifier extends StateNotifier<FirebaseStorageState> {
   /// [void]を返す
   Future<void> createFolder({
     required String currentPath,
-    required String folderName,
   }) async {
+    final folderName = state.folderName;
+    if (folderName.isEmpty) {
+      return;
+    }
+
     final newFolderName = '$currentPath/$folderName';
     try {
       await storageService.createFolder(
         folderPath: newFolderName,
+      );
+
+      state = state.copyWith(
+        folderName: '',
       );
     } catch (error, stack) {
       if (kDebugMode) {
@@ -169,5 +177,12 @@ class FirebaseStorageNotifier extends StateNotifier<FirebaseStorageState> {
         print(stack);
       }
     }
+  }
+
+  /// フォルダ名の入力を反映する
+  void setFolderName(String text) {
+    state = state.copyWith(
+      folderName: text,
+    );
   }
 }

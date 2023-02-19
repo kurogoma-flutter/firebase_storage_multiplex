@@ -8,5 +8,6 @@ part 'firebase_storage_state.freezed.dart';
 class FirebaseStorageState with _$FirebaseStorageState {
   const factory FirebaseStorageState({
     @Default(AsyncValue.loading()) AsyncValue<List<FolderModel>> fileList,
+    @Default('') String folderName,
   }) = _FirebaseStorageState;
 }

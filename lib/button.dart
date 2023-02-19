@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'dialog.dart';
-import 'notifier/firebase_storage_notifier.dart';
 
-class FolderCreateButton extends ConsumerWidget {
+class FolderCreateButton extends StatelessWidget {
   const FolderCreateButton({
     super.key,
     required this.currentPath,
-    required this.folderName,
+    required this.onTap,
+    required this.onChanged,
   });
 
   final String currentPath;
-  final String folderName;
+  final Future<void> Function() onTap;
+  final Function(String) onChanged;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MenuButton(
       icon: Icons.folder_open_rounded,
       onTap: () {
@@ -27,13 +28,9 @@ class FolderCreateButton extends ConsumerWidget {
               title: 'フォルダを作成',
               formContent: 'フォルダ名を入力してください',
               label: '作成',
-              onTap: () async {
-                await ref
-                    .read(firebaseStorageNotifierProvider.notifier)
-                    .createFolder(
-                      currentPath: currentPath,
-                      folderName: folderName,
-                    );
+              onTap: onTap,
+              onChanged: (text) {
+                onChanged;
               },
             );
           },

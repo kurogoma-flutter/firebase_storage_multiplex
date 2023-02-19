@@ -18,12 +18,14 @@ class BlurAlertDialog extends StatelessWidget {
     required this.formContent,
     required this.label,
     required this.onTap,
+    required this.onChanged,
   });
 
   final String title;
   final String formContent;
   final String label;
   final Function() onTap;
+  final Function(String) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,8 @@ class BlurAlertDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         title: Text(title),
-        content: TextField(
+        content: TextFormField(
+          onChanged: onChanged,
           keyboardType: TextInputType.text,
           maxLines: 1,
           maxLength: 40,
