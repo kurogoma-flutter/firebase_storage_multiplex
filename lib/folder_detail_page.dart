@@ -162,6 +162,11 @@ class _FolderDetailPageState extends ConsumerState<FolderDetailPage>
                 const SizedBox(height: 12),
                 FileUploadButton(
                   currentPath: widget.folderPath,
+                  onTap: () async {
+                    notifier.createFile(
+                      folderPath: widget.folderPath,
+                    );
+                  },
                 ),
               ],
             ),

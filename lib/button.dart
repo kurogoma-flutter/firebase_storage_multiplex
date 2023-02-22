@@ -19,7 +19,7 @@ class FolderCreateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return MenuButton(
       icon: Icons.folder_open_rounded,
-      onTap: () {
+      onTap: () async {
         showDialog(
           context: context,
           builder: (context) {
@@ -44,15 +44,17 @@ class FileUploadButton extends ConsumerWidget {
   const FileUploadButton({
     super.key,
     required this.currentPath,
+    required this.onTap,
   });
 
   final String currentPath;
+  final Future Function() onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MenuButton(
       icon: Icons.file_upload_rounded,
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }

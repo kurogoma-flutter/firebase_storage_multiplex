@@ -174,8 +174,13 @@ class _HomePageState extends ConsumerState<HomePage> with RouteAware {
                   },
                 ),
                 const SizedBox(height: 12),
-                const FileUploadButton(
+                FileUploadButton(
                   currentPath: 'users/',
+                  onTap: () async {
+                    notifier.createFile(
+                      folderPath: 'users/',
+                    );
+                  },
                 ),
               ],
             ),
